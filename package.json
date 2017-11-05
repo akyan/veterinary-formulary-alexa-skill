@@ -1,0 +1,24 @@
+{
+  "name": "vetenary-formulary-alexa-skill",
+  "version": "1.0.0",
+  "description": "A lambda service that responds to queries about vetenary drugs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James Gawn",
+  "license": "CC-BY-NC-ND-4.0",
+  "private": true,
+  "dependencies": {
+    "alexa-sdk": "^1.0.18"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-zip": "^4.0.0",
+    "install": "^0.10.1",
+    "node-aws-lambda": "^0.1.8",
+    "run-sequence": "^2.2.0"
+  }
+}
