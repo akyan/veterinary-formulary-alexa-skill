@@ -21,7 +21,7 @@ gulp.task('node-mods', function() {
 });
 
 gulp.task('zip', function() {
-	return gulp.src(['dist/**/*', '!dist/package.json'])
+	return gulp.src(['dist/**', '!dist/package.json', '!dist/package-lock.json'], {nodir: true})
 		.pipe(zip('dist.zip'))
 		.pipe(gulp.dest('./'));
 });
