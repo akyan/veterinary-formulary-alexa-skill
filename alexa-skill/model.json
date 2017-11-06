@@ -1,0 +1,236 @@
+{
+  "languageModel": {
+	"types": [
+	  {
+		"name": "Animal",
+		"values": [
+		  {
+			"id": null,
+			"name": {
+			  "value": "cat",
+			  "synonyms": []
+			}
+		  },
+		  {
+			"id": null,
+			"name": {
+			  "value": "dog",
+			  "synonyms": []
+			}
+		  },
+		  {
+			"id": null,
+			"name": {
+			  "value": "animal",
+			  "synonyms": []
+			}
+		  }
+		]
+	  },
+	  {
+		"name": "Drug",
+		"values": [
+		  {
+			"id": null,
+			"name": {
+			  "value": "Buprenorphine",
+			  "synonyms": [
+				"vetergesic",
+				"bup"
+			  ]
+			}
+		  }
+		]
+	  },
+	  {
+		"name": "Volume",
+		"values": [
+		  {
+			"id": null,
+			"name": {
+			  "value": "milliliters",
+			  "synonyms": [
+				"mills",
+				"ml"
+			  ]
+			}
+		  }
+		]
+	  },
+	  {
+		"name": "WeightUnit",
+		"values": [
+		  {
+			"id": null,
+			"name": {
+			  "value": "kilogram",
+			  "synonyms": [
+				"kilograms",
+				"kilo"
+			  ]
+			}
+		  }
+		]
+	  }
+	],
+	"intents": [
+	  {
+		"name": "AMAZON.CancelIntent",
+		"samples": []
+	  },
+	  {
+		"name": "AMAZON.HelpIntent",
+		"samples": []
+	  },
+	  {
+		"name": "AMAZON.StopIntent",
+		"samples": []
+	  },
+	  {
+		"name": "DoseCalulatorIntent",
+		"samples": [
+		  "What's the {DRUG} dose for a {ANIMAL} weighing {WEIGHTINTEGER} point {WEIGHTDECIMAL} {WEIGHTUNIT}",
+		  "What is the dose of {DRUG} for a {WEIGHTINTEGER} {WEIGHTUNIT} point {WEIGHTDECIMAL} {WEIGHTUNIT} {ANIMAL}",
+		  "Give me the {DRUG} dose for an {ANIMAL} weighing {WEIGHTINTEGER} point {WEIGHTDECIMAL} {WEIGHTUNIT}"
+		],
+		"slots": [
+		  {
+			"name": "DRUG",
+			"type": "Drug",
+			"samples": [
+			  "{DRUG}"
+			]
+		  },
+		  {
+			"name": "WEIGHTINTEGER",
+			"type": "AMAZON.NUMBER",
+			"samples": [
+			  "The animal weighs {WEIGHTINTEGER} kilograms.",
+			  "{WEIGHTINTEGER} kilograms"
+			]
+		  },
+		  {
+			"name": "WEIGHTDECIMAL",
+			"type": "AMAZON.NUMBER"
+		  },
+		  {
+			"name": "WEIGHTUNIT",
+			"type": "WeightUnit",
+			"samples": [
+			  "The weight is given in {WEIGHTUNIT}",
+			  "{WEIGHTUNIT}"
+			]
+		  },
+		  {
+			"name": "ANIMAL",
+			"type": "Animal"
+		  }
+		]
+	  },
+	  {
+		"name": "SayHello",
+		"samples": [
+		  "Say Hello"
+		],
+		"slots": []
+	  }
+	],
+	"invocationName": "eva"
+  },
+  "prompts": [
+	{
+	  "id": "Confirm.Intent-DoseCalulatorIntent",
+	  "variations": [
+		{
+		  "type": "PlainText",
+		  "value": "You have asked what the {DRUG} dose is for an {ANIMAL} weighing {WEIGHTINTEGER} point {WEIGHTDECIMAL} {WEIGHTUNIT}. Is that correct?"
+		}
+	  ]
+	},
+	{
+	  "id": "Elicit.Intent-DoseCalulatorIntent.IntentSlot-DRUG",
+	  "variations": [
+		{
+		  "type": "PlainText",
+		  "value": "What drug do you need a dose for?"
+		}
+	  ]
+	},
+	{
+	  "id": "Elicit.Intent-DoseCalulatorIntent.IntentSlot-WEIGHTINTEGER",
+	  "variations": [
+		{
+		  "type": "PlainText",
+		  "value": "What is the weight of the animal in kilograms?"
+		},
+		{
+		  "type": "PlainText",
+		  "value": "How much does your animal weight?"
+		}
+	  ]
+	},
+	{
+	  "id": "Elicit.Intent-DoseCalulatorIntent.IntentSlot-WEIGHTUNIT",
+	  "variations": [
+		{
+		  "type": "PlainText",
+		  "value": "What is the unit of the weight you have provided?"
+		}
+	  ]
+	}
+  ],
+  "dialog": {
+	"intents": [
+	  {
+		"name": "DoseCalulatorIntent",
+		"confirmationRequired": true,
+		"prompts": {
+		  "confirmation": "Confirm.Intent-DoseCalulatorIntent"
+		},
+		"slots": [
+		  {
+			"name": "DRUG",
+			"type": "Drug",
+			"elicitationRequired": true,
+			"confirmationRequired": false,
+			"prompts": {
+			  "elicitation": "Elicit.Intent-DoseCalulatorIntent.IntentSlot-DRUG"
+			}
+		  },
+		  {
+			"name": "WEIGHTINTEGER",
+			"type": "AMAZON.NUMBER",
+			"elicitationRequired": true,
+			"confirmationRequired": false,
+			"prompts": {
+			  "elicitation": "Elicit.Intent-DoseCalulatorIntent.IntentSlot-WEIGHTINTEGER"
+			}
+		  },
+		  {
+			"name": "WEIGHTDECIMAL",
+			"type": "AMAZON.NUMBER",
+			"elicitationRequired": false,
+			"confirmationRequired": false,
+			"prompts": {}
+		  },
+		  {
+			"name": "WEIGHTUNIT",
+			"type": "WeightUnit",
+			"elicitationRequired": true,
+			"confirmationRequired": false,
+			"prompts": {
+			  "elicitation": "Elicit.Intent-DoseCalulatorIntent.IntentSlot-WEIGHTUNIT"
+			}
+		  },
+		  {
+			"name": "ANIMAL",
+			"type": "Animal",
+			"elicitationRequired": false,
+			"confirmationRequired": false,
+			"prompts": {}
+		  }
+		]
+	  }
+	]
+  }
+}

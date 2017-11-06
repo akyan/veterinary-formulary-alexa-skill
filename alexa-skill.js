@@ -9,12 +9,12 @@
  **/
 
 'use strict';
-
+var logger = require('bunyan').createLogger({name: 'eva-skill'});
 const Alexa = require('alexa-sdk');
 
 const APP_ID = process.env['APP_ID'];
 
-const handlers = {
+const BuiltInIntentHandler = {
 	'LaunchRequest': function () {
 		this.emit('GetFact');
 	},
@@ -39,8 +39,15 @@ const handlers = {
 };
 
 exports.handler = function (event, context) {
+	logger.info('Initialising Skill');
 	const alexa = Alexa.handler(event, context);
 	alexa.appId = APP_ID;
-	alexa.registerHandlers(handlers);
+
+	logger.info('Registering Intent Handler');
+	alexa.registerHandlers(BuiltInIntentHandler);
+
+	logger.info('Executing Response');
 	alexa.execute();
+
+	logger.info('Response Sent');
 };

@@ -1,0 +1,40 @@
+{
+  "session": {
+	"new": true,
+	"sessionId": "SessionId.f96480e5-2675-4567-909e-078ac9edadcc",
+	"application": {
+	  "applicationId": "amzn1.ask.skill.47faeccb-34a0-41eb-b954-13279cdc0578"
+	},
+	"attributes": {},
+	"user": {
+	  "userId": "amzn1.ask.account.AF6RPDCMMNB53JQP3HYXDR3OILI7HYQU2NKK463KN34C2V2LFTFWQSVEBBDGT3CGSMRLKKRCSLZBB7X6VO7LC2BY4IEXFYP63P74U3PZGAMWSUQGFWXJO7OETTTM6PFFRBELUGKQDVI5PXEH3IYHVZSNGRGNZPXNS6NWRNTB5GV5LUHCGXAUFGTNRM4HAXMNBTCBAOEQMQYXANQ"
+	}
+  },
+  "request": {
+	"type": "IntentRequest",
+	"requestId": "EdwRequestId.888e5bfe-95c8-4aba-9f42-b81c58248c6d",
+	"intent": {
+	  "name": "SayHello",
+	  "slots": {}
+	},
+	"locale": "en-GB",
+	"timestamp": "2017-11-05T16:34:51Z"
+  },
+  "context": {
+	"AudioPlayer": {
+	  "playerActivity": "IDLE"
+	},
+	"System": {
+	  "application": {
+		"applicationId": "amzn1.ask.skill.47faeccb-34a0-41eb-b954-13279cdc0578"
+	  },
+	  "user": {
+		"userId": "amzn1.ask.account.AF6RPDCMMNB53JQP3HYXDR3OILI7HYQU2NKK463KN34C2V2LFTFWQSVEBBDGT3CGSMRLKKRCSLZBB7X6VO7LC2BY4IEXFYP63P74U3PZGAMWSUQGFWXJO7OETTTM6PFFRBELUGKQDVI5PXEH3IYHVZSNGRGNZPXNS6NWRNTB5GV5LUHCGXAUFGTNRM4HAXMNBTCBAOEQMQYXANQ"
+	  },
+	  "device": {
+		"supportedInterfaces": {}
+	  }
+	}
+  },
+  "version": "1.0"
+}
