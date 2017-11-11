@@ -1,0 +1,12 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="BadExpressionStatementJS" enabled="true" level="WARNING" enabled_by_default="false">
+      <scope name="Tests" level="UNUSED ENTRY" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="JSUnresolvedVariable" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <scope name="Tests" level="UNUSED ENTRY" enabled="true" />
+      <scope name="Project Files" level="WEAK WARNING" enabled="true" />
+    </inspection_tool>
+  </profile>
+</component>
