@@ -9,45 +9,89 @@
  **/
 
 'use strict';
-var logger = require('bunyan').createLogger({name: 'eva-skill'});
+var bunyan = require('bunyan');
+var LogHelper = require('./lib/LogHelper');
 const Alexa = require('alexa-sdk');
 
 const APP_ID = process.env['APP_ID'];
 
-const BuiltInIntentHandler = {
+const BuiltInIntentHandler = function (logger) {
+
+	var log = new LogHelper(logger, 'BuiltInIntentHandler');
+
+	return {
 	'LaunchRequest': function () {
-		this.emit('GetFact');
-	},
-	'HelloWorldIntent': function () {
-		this.emit('SayHello')
+		log.info('LaunchRequest', {event: this.event.request});
+
+		this.emit('SayHello');
 	},
 	'SayHello': function () {
-		this.response.speak('Hello World!');
+		log.info('SayHello', {event: this.event.request});
+
+		this.response.speak('Hello, I am Eva, your electonic veterinary assistant!');
 		this.emit(':responseReady');
 	},
+	'DrugDoseCalulatorIntent': function () {
+		log.info('DrugDoseCalulatorIntent', {event: this.event.request});
+
+		if (this.event.request.dialogState == "STARTED" || this.event.request.dialogState == "IN_PROGRESS"){
+			log.info('DrugDoseCalulatorIntent', 'DialogIncomplete Initiating Delegate Dialog');
+			this.emit(':delegate');
+		} else {
+			log.info('DrugDoseCalulatorIntent', 'Drug: ' + this.attribute['DRUG']);
+			log.info('DrugDoseCalulatorIntent', 'Animal: ' + this.attribute['ANIMAL']);
+			log.info('DrugDoseCalulatorIntent', 'Weight Integer: ' + this.attribute['WEIGHTINTEGER']);
+			log.info('DrugDoseCalulatorIntent', 'Weight Decimal: ' + this.attribute['WEIGHTDECIMAL']);
+
+			var weight = this.attribute['WEIGHTINTEGER'] + (this.attribute['WEIGHTDECIMAL'] / 10);
+			log.info('DrugDoseCalulatorIntent', 'Weight: ' + weight);
+
+			this.emit(':tell', 'The blah does for an ' + this.attributes['ANIMAL'] + 'weighing ' + weight + ' kilograms');
+		}
+	},
 	'AMAZON.HelpIntent': function () {
+		log.info('HelpIntent', {event: this.event.request});
+
 		const speechOutput = this.t('HELP_MESSAGE');
 		const reprompt = this.t('HELP_MESSAGE');
 		this.emit(':ask', speechOutput, reprompt);
 	},
 	'AMAZON.CancelIntent': function () {
+		log.info('CancelIntent', {event: this.event.request});
+
 		this.emit(':tell', this.t('STOP_MESSAGE'));
 	},
 	'AMAZON.StopIntent': function () {
+		log.info('StopIntent', {event: this.event.request});
+
 		this.emit(':tell', this.t('STOP_MESSAGE'));
-	}
+	}}
 };
 
 exports.handler = function (event, context) {
-	logger.info('Initialising Skill');
+	var logger = bunyan.createLogger({name: 'eva-skill', requestId: context.awsRequestId});
+	var log = new LogHelper(logger, 'Alexa-Skill');
+
+	var customLogLevel = process.env['LOG_LEVEL'];
+	if (typeof customLogLevel != 'undefined')
+	{
+		if (customLogLevel == 'trace' || customLogLevel == 'debug' || customLogLevel == 'info' || customLogLevel == 'warn' || customLogLevel == 'error' || customLogLevel == 'fatal')
+		{
+			logger.level(customLogLevel);
+			log.warn('handler', 'Custom log level set to ' + customLogLevel);
+		}
+	}
+
+	log.trace('handler', 'Initialising Skill');
+
 	const alexa = Alexa.handler(event, context);
 	alexa.appId = APP_ID;
 
-	logger.info('Registering Intent Handler');
-	alexa.registerHandlers(BuiltInIntentHandler);
+	log.trace('handler', 'Registering Intent Handler');
+	alexa.registerHandlers(BuiltInIntentHandler(logger));
 
-	logger.info('Executing Response');
+	log.trace('handler', 'Executing Response');
 	alexa.execute();
 
-	logger.info('Response Sent');
+	log.trace('handler', 'Response Sent');
 };
