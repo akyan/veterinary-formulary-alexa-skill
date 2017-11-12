@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/veterinary-formulary-alexa-skill.iml" filepath="$PROJECT_DIR$/.idea/veterinary-formulary-alexa-skill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/electronic-veterinary-assistant.iml" filepath="$PROJECT_DIR$/.idea/electronic-veterinary-assistant.iml" />
     </modules>
   </component>
 </project>
