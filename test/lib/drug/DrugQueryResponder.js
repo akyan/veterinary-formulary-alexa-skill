@@ -21,7 +21,7 @@ describe('DrugQueryResponder', function() {
 
 	});
 
-	it('#calculateDrugDose', function() {
+	it('#calculateDrugDose found', function() {
 		log.info = sinon.spy();
 		var drugName = 'blah';
 		var weight = 4;
@@ -36,6 +36,21 @@ describe('DrugQueryResponder', function() {
 		expect(drugStub.calculateDose).to.be.calledOnce;
 		expect(drugLibrary.findDrugByName).to.be.calledOnce;
 		expect(log.info).to.be.calledOnce;
+	});
+
+	it('#calculateDrugDose not found', function() {
+		log.info = sinon.spy();
+		log.warn = sinon.spy();
+		var drugName = 'blah';
+		drugLibrary.findDrugByName = sinon.stub();
+		drugLibrary.findDrugByName.withArgs(drugName).returns(undefined);
+		subject = new DrugQueryResponder(log, drugLibrary);
+
+		var response = subject.calculateDrugDose('blah', 4);
+		expect(response).to.be.equal(undefined);
+		expect(drugLibrary.findDrugByName).to.be.calledOnce;
+		expect(log.info).to.be.calledOnce;
+		expect(log.warn).to.be.calledOnce;
 	});
 
 	after(function () {
