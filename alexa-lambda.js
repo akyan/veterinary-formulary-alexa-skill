@@ -9,15 +9,15 @@
  **/
 
 'use strict';
-var bunyan = require('bunyan');
-var LogHelper = require('./lib/LogHelper');
+const bunyan = require('bunyan');
+const LogHelper = require('./lib/LogHelper');
 const Alexa = require('alexa-sdk');
 
 const APP_ID = process.env['APP_ID'];
 
 const BuiltInIntentHandler = function (logger) {
 
-	var log = new LogHelper(logger, 'BuiltInIntentHandler');
+	const log = new LogHelper(logger, 'BuiltInIntentHandler');
 
 	return {
 	'LaunchRequest': function () {

@@ -14,19 +14,19 @@ gulp.task('copy-data', function() {
 		.pipe(gulp.dest('dist/data'));
 });
 
-gulp.task('copy-libs', function() {
+gulp.task('copy-lib-shared', function() {
 	return gulp.src('lib/**')
 		.pipe(gulp.dest('dist/lib'));
-});
-
-gulp.task('copy-js', function (){
-	return runSequence(['copy-data'],
-		['copy-libs'])
 });
 
 gulp.task('copy-alexa-lambda', function() {
 	return gulp.src('alexa-lambda.js')
 		.pipe(gulp.dest('dist/'));
+});
+
+gulp.task('copy-lib-lex', function() {
+	return gulp.src('lib-lex/**')
+		.pipe(gulp.dest('dist/lib-lex'));
 });
 
 gulp.task('copy-lex-lambda', function() {
@@ -57,7 +57,7 @@ gulp.task('upload-lex-lambda', function(callback) {
 gulp.task('deploy-alexa-lambda', function(callback) {
 	return runSequence(
 		['clean'],
-		['copy-js', 'copy-alexa-lambda'],
+		['copy-lib-shared', 'copy-data', 'copy-alexa-lambda'],
 		['node-mods'],
 		['zip'],
 		['upload-alexa-lambda'],
@@ -68,7 +68,7 @@ gulp.task('deploy-alexa-lambda', function(callback) {
 gulp.task('deploy-lex-lambda', function(callback) {
 	return runSequence(
 		['clean'],
-		['copy-js', 'copy-lex-lambda'],
+		['copy-lib-shared', 'copy-data', 'copy-lib-lex', 'copy-lex-lambda'],
 		['node-mods'],
 		['zip'],
 		['upload-lex-lambda'],
