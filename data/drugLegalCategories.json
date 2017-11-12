@@ -1,0 +1,22 @@
+[{
+  "code": "POM-V",
+  "name": "Prescription Only Medicine - Veterinarian",
+  "authorisedDispensers": ["Veterinarian"]
+}, {
+  "code": "CD",
+  "name": "Controlled Drugs",
+  "authorisedDispensers": ["Veterinarian"]
+}, {
+  "code": "POM-VPS",
+  "name": "Prescription-only Medicine – Veterinarian, Pharmacist, Suitably Qualified Person (SQP)",
+  "authorisedDispensers": ["Veterinarian", "Pharmacist", "Suitably Qualified Person (SQP)"]
+}, {
+  "code": "NFA-VPS",
+  "name": "Non-Food Animal – Veterinarian, Pharmacist, Suitably Qualified Person (SQP)",
+  "authorisedDispensers": ["Veterinarian", "Pharmacist", "Suitably Qualified Person (SQP)"]
+}, {
+  "code": "AVM-GSL",
+  "name": "Authorised Veterinary Medicine – General Sales List",
+  "authorisedDispensers": ["Anyone"]
+}
+]

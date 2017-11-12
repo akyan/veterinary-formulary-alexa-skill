@@ -31,28 +31,28 @@ describe('DrugLibrary', function() {
 
 	});
 
-	it('#findDrugByName successful', function() {
+	it('#findByName successful', function() {
 		subject = new DrugLibrary(libraryLogger, [new Drug(logger, bupfact)]);
-		var bup = subject.findDrugByName('Buprenorphine');
+		var bup = subject.findByName('Buprenorphine');
 
 		expect(bup.name).to.equal(bupfact.name);
 		expect(bup.concentration).to.equal(bupfact.concentration);
 		expect(bup.doseRate).to.equal(bupfact.doseRate);
 		expect(bup.gtin).to.equal(bupfact.gtin);
 		expect(libraryLogger.info).to.be.calledOnce;
-		expect(libraryLogger.info).to.be.calledWith('findDrugByName', 'Finding drug by name: ' + bupfact.name);
+		expect(libraryLogger.info).to.be.calledWith('findByName', 'Finding drug by name: ' + bupfact.name);
 		expect(libraryLogger.warn).to.not.be.calledOnce;
 	});
 
-	it('#findDrugByName unsuccessful', function() {
+	it('#findByName unsuccessful', function() {
 		subject = new DrugLibrary(libraryLogger, [new Drug(logger, bupfact)]);
-		var bup = subject.findDrugByName('3151');
+		var bup = subject.findByName('3151');
 
 		expect(bup).to.equal(undefined);
 		expect(libraryLogger.info).to.be.calledOnce;
-		expect(libraryLogger.info).to.be.calledWith('findDrugByName', 'Finding drug by name: 3151');
+		expect(libraryLogger.info).to.be.calledWith('findByName', 'Finding drug by name: 3151');
 		expect(libraryLogger.warn).to.be.calledOnce;
-		expect(libraryLogger.warn).to.be.calledWith('findDrugByName', 'Failed to retrieve drug with name 3151');
+		expect(libraryLogger.warn).to.be.calledWith('findByName', 'Failed to retrieve drug with name: 3151');
 
 	});
 
