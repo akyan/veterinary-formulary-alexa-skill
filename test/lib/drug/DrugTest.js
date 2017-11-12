@@ -24,17 +24,22 @@ describe('Drug', function() {
 		});
 	});
 
-	it('#constructor successful', function() {
-		expect(subject.name).to.equal('Buprenorphine');
-		expect(subject.doseRate).to.equal(0.2);
-		expect(subject.concentration).to.equal(0.3);
+	describe('#constructor', function() {
+		it('successfully stores inputs', function() {
+			expect(subject.name).to.equal('Buprenorphine');
+			expect(subject.doseRate).to.equal(0.2);
+			expect(subject.concentration).to.equal(0.3);
+		});
 	});
 
-	it('#calculateDose', function() {
-		log.info = sinon.spy();
-		var dose = subject.calculateDose(4);
-		expect(dose).to.equal(2.666666666666667);
-		expect(log.info).to.be.calledWith('calculateDose', 'Calculating dose for Buprenorphine for animal with weight 4');
+	describe('#calculateDose', function () {
+		it('calculates correct dose', function() {
+			log.info = sinon.spy();
+			var dose = subject.calculateDose(4);
+			expect(dose).to.equal(2.666666666666667);
+			expect(log.info).to.be.calledWith('calculateDose', 'Calculating dose for Buprenorphine for animal with weight 4');
+		});
+
 	});
 
 	after(function () {

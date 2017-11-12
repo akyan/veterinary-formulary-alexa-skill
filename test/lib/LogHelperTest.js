@@ -28,7 +28,14 @@ describe('LogHelper', function() {
 		subject = new LogHelper(logger, object);
 	});
 
-	it('#log info', function() {
+	it('#constructor', function() {
+		it('successfully stores inputs', function() {
+			expect(subject.logger).to.equal(logger);
+			expect(subject.object).to.equal(object);
+		});
+	});
+
+	it('#info', function() {
 		subject.info(method, message);
 		expect(logger.info).to.be.calledOnce;
 		expect(logger.info).to.be.calledWith({class: object, function: method, message: message});
@@ -40,7 +47,7 @@ describe('LogHelper', function() {
 		expect(logger.fatal).not.to.be.called;
 	});
 
-	it('#log warn', function() {
+	it('#warn', function() {
 		subject.warn(method, message);
 		expect(logger.warn).to.be.calledOnce;
 		expect(logger.warn).to.be.calledWith({class: object, function: method, message: message});
@@ -52,7 +59,7 @@ describe('LogHelper', function() {
 		expect(logger.fatal).not.to.be.called;
 	});
 
-	it('#log debug', function() {
+	it('#debug', function() {
 		subject.debug(method, message);
 		expect(logger.debug).to.be.calledOnce;
 		expect(logger.debug).to.be.calledWith({class: object, function: method, message: message});
@@ -64,7 +71,7 @@ describe('LogHelper', function() {
 		expect(logger.fatal).not.to.be.called;
 	});
 
-	it('#log trace', function() {
+	it('#trace', function() {
 		subject.trace(method, message);
 		expect(logger.trace).to.be.calledOnce;
 		expect(logger.trace).to.be.calledWith({class: object, function: method, message: message});
@@ -76,7 +83,7 @@ describe('LogHelper', function() {
 		expect(logger.fatal).not.to.be.called;
 	});
 
-	it('#log error', function() {
+	it('#error', function() {
 		subject.error(method, message);
 		expect(logger.error).to.be.calledOnce;
 		expect(logger.error).to.be.calledWith({class: object, function: method, message: message});
@@ -88,7 +95,7 @@ describe('LogHelper', function() {
 		expect(logger.fatal).not.to.be.called;
 	});
 
-	it('#log fatal', function() {
+	it('#fatal', function() {
 		subject.fatal(method, message);
 		expect(logger.fatal).to.be.calledOnce;
 		expect(logger.fatal).to.be.calledWith({class: object, function: method, message: message});

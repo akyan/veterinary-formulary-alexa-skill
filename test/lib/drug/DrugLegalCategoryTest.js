@@ -18,15 +18,17 @@ describe('DrugLegalCategory', function() {
 		log = {};
 	});
 
-	it('#constructor successful', function() {
-		var code = "TEST-Code";
-		var name = "Test Name";
-		var authorisedDispensers = ['Bob'];
-		subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
+	describe('#constructor', function() {
+		it('successfully stores inputs', function() {
+			var code = "TEST-Code";
+			var name = "Test Name";
+			var authorisedDispensers = ['Bob'];
+			subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
 
-		expect(subject.code).to.equal(code);
-		expect(subject.name).to.equal(name);
-		expect(subject.authorisedDispensers).to.deep.equal(authorisedDispensers);
+			expect(subject.code).to.equal(code);
+			expect(subject.name).to.equal(name);
+			expect(subject.authorisedDispensers).to.deep.equal(authorisedDispensers);
+		});
 	});
 
 	after(function () {

@@ -11,10 +11,10 @@ describe('vet-formulary', function() {
 		nock.disableNetConnect();
 	});
 
-	it('handler', function() {
-		// var event = require('./data/invocations/sayhello.json');
-		// VetFormulary.handler(event);
-	});
+	// it('handler', function() {
+	// 	var event = require('./data/invocations/sayhello.json');
+	// 	VetFormulary.handler(event);
+	// });
 
 	after(function () {
 		nock.enableNetConnect();
