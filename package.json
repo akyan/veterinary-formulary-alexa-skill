@@ -1,7 +1,7 @@
 {
-  "name": "vetenary-formulary-alexa-skill",
+  "name": "electronic-veterinary-assistant",
   "version": "1.0.0",
-  "description": "A lambda based Alexa service that responds to queries about vetenary drugs.",
+  "description": "A lambda based Alexa and Lex service that responds to queries about vetenary drugs.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

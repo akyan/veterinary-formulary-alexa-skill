@@ -5,16 +5,8 @@ var install = require('gulp-install');
 var runSequence = require('run-sequence');
 var awsLambda = require("node-aws-lambda");
 
-//var AWS = require('aws-sdk');
-//AWS.config.update({region: process.env['AWS_REGION']});
-
 gulp.task('clean', function() {
 	return del(['./dist', './dist.zip']);
-});
-
-gulp.task('copy-skill', function() {
-	return gulp.src('alexa-lambda-function.js')
-		.pipe(gulp.dest('dist/'));
 });
 
 gulp.task('copy-data', function() {
@@ -28,9 +20,13 @@ gulp.task('copy-libs', function() {
 });
 
 gulp.task('copy-js', function (){
-	return runSequence(['copy-skill'],
-		['copy-data'],
+	return runSequence(['copy-data'],
 		['copy-libs'])
+});
+
+gulp.task('copy-alexa-skill', function() {
+	return gulp.src('alexa-lambda-function.js')
+		.pipe(gulp.dest('dist/'));
 });
 
 gulp.task('node-mods', function() {
@@ -52,17 +48,10 @@ gulp.task('upload', function(callback) {
 gulp.task('deploy-alexa-skill', function(callback) {
 	return runSequence(
 		['clean'],
-		['copy-js', 'node-mods'],
+		['copy-js', 'copy-alexa-skill'],
+		['node-mods'],
 		['zip'],
 		['upload'],
 		callback
 	);
 });
-
-// gulp.task('update-dynamodb-data', function(callback) {
-// 	var dynamodb = new AWS.DynamoDB();
-//
-// 	dynamodb.describeTable({TableName: 'EvaDrugLibrary'}, function(err, data) {
-//
-// 	})
-// });
