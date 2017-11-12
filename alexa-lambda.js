@@ -34,7 +34,7 @@ const BuiltInIntentHandler = function (logger) {
 	'DrugDoseCalulatorIntent': function () {
 		log.info('DrugDoseCalulatorIntent', {event: this.event.request});
 
-		if (this.event.request.dialogState == "STARTED" || this.event.request.dialogState == "IN_PROGRESS"){
+		if (this.event.request.dialogState === "STARTED" || this.event.request.dialogState === "IN_PROGRESS"){
 			log.info('DrugDoseCalulatorIntent', 'DialogIncomplete Initiating Delegate Dialog');
 			this.emit(':delegate');
 		} else {
@@ -69,13 +69,13 @@ const BuiltInIntentHandler = function (logger) {
 };
 
 exports.handler = function (event, context) {
-	var logger = bunyan.createLogger({name: 'eva-skill', requestId: context.awsRequestId});
-	var log = new LogHelper(logger, 'Alexa-Skill');
+	var logger = bunyan.createLogger({name: 'eva-alexa-function', requestId: context.awsRequestId});
+	var log = new LogHelper(logger, 'alexa-lambda');
 
 	var customLogLevel = process.env['LOG_LEVEL'];
-	if (typeof customLogLevel != 'undefined')
+	if (typeof customLogLevel !== 'undefined')
 	{
-		if (customLogLevel == 'trace' || customLogLevel == 'debug' || customLogLevel == 'info' || customLogLevel == 'warn' || customLogLevel == 'error' || customLogLevel == 'fatal')
+		if (customLogLevel === 'trace' || customLogLevel === 'debug' || customLogLevel === 'info' || customLogLevel === 'warn' || customLogLevel === 'error' || customLogLevel === 'fatal')
 		{
 			logger.level(customLogLevel);
 			log.warn('handler', 'Custom log level set to ' + customLogLevel);

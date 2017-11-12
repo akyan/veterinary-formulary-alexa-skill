@@ -1,10 +1,10 @@
 module.exports = {
 	accessKeyId: process.env['AWS_ACCESS_KEY_ID'],
 	secretAccessKey: process.env['AWS_SECRET_ACCESS_KEY'],
-	region: 'eu-west-1',
-	handler: 'alexa-lambda.handler',
+	region: 'us-east-1',
+	handler: 'lex-lambda.handler',
 	role: 'arn:aws:iam::979779020614:role/ElectronicVeterinaryAssistantRole',
-	functionName: 'ElectronicVeterinaryAssistantAlexaSkill',
+	functionName: 'ElectronicVeterinaryAssistantLexFunction',
 	timeout: 10,
 	memorySize: 128,
 	publish: true,

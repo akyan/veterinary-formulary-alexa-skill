@@ -24,8 +24,13 @@ gulp.task('copy-js', function (){
 		['copy-libs'])
 });
 
-gulp.task('copy-alexa-skill', function() {
-	return gulp.src('alexa-lambda-function.js')
+gulp.task('copy-alexa-lambda', function() {
+	return gulp.src('alexa-lambda.js')
+		.pipe(gulp.dest('dist/'));
+});
+
+gulp.task('copy-lex-lambda', function() {
+	return gulp.src('lex-lambda.js')
 		.pipe(gulp.dest('dist/'));
 });
 
@@ -41,17 +46,32 @@ gulp.task('zip', function() {
 		.pipe(gulp.dest('./'));
 });
 
-gulp.task('upload', function(callback) {
+gulp.task('upload-alexa-lambda', function(callback) {
 	awsLambda.deploy('./dist.zip', require("./alexa-lambda-config.js"), callback);
 });
 
-gulp.task('deploy-alexa-skill', function(callback) {
+gulp.task('upload-lex-lambda', function(callback) {
+	awsLambda.deploy('./dist.zip', require("./lex-lambda-config.js"), callback);
+});
+
+gulp.task('deploy-alexa-lambda', function(callback) {
 	return runSequence(
 		['clean'],
-		['copy-js', 'copy-alexa-skill'],
+		['copy-js', 'copy-alexa-lambda'],
 		['node-mods'],
 		['zip'],
-		['upload'],
+		['upload-alexa-lambda'],
+		callback
+	);
+});
+
+gulp.task('deploy-lex-lambda', function(callback) {
+	return runSequence(
+		['clean'],
+		['copy-js', 'copy-lex-lambda'],
+		['node-mods'],
+		['zip'],
+		['upload-lex-lambda'],
 		callback
 	);
 });
