@@ -5,8 +5,9 @@ var expect = chai.expect;
 chai.use(require('sinon-chai'));
 
 
-var DrugLibrary = require('../../lib/DrugLibrary');
-var Drug = require('../../lib/Drug');
+var DrugLibrary = require('../../../lib/drug/DrugLibrary');
+var Drug = require('../../../lib/drug/Drug');
+var LogHelper = require('../../../lib/LogHelper');
 
 describe('DrugLibrary', function() {
 	var subject;
@@ -55,12 +56,14 @@ describe('DrugLibrary', function() {
 
 	});
 
-	// it('#build', function() {
-	// 	var drugLibrary = DrugLibrary.build(logger, [bupfact]);
-	// 	var map = {};
-	// 	map[bupfact.name] = bupfact;
-	// 	expect(logger, drugLibrary.map).to.equal(map);
-	// });
+	it('#build', function() {
+
+		var logger = {};
+		var drugLibrary = DrugLibrary.build(logger, [bupfact]);
+		var map = {};
+		map[bupfact.name] = new Drug(new LogHelper({}, 'Drug'), bupfact);
+		expect(drugLibrary.map).to.deep.eq(map);
+	});
 
 	after(function () {
 		nock.enableNetConnect();
