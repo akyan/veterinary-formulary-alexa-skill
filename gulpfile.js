@@ -13,7 +13,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('copy-skill', function() {
-	return gulp.src('alexa-skill.js')
+	return gulp.src('alexa-lambda-function.js')
 		.pipe(gulp.dest('dist/'));
 });
 
@@ -46,7 +46,7 @@ gulp.task('zip', function() {
 });
 
 gulp.task('upload', function(callback) {
-	awsLambda.deploy('./dist.zip', require("./lambda-config.js"), callback);
+	awsLambda.deploy('./dist.zip', require("./alexa-lambda-config.js"), callback);
 });
 
 gulp.task('deploy-alexa-skill', function(callback) {
