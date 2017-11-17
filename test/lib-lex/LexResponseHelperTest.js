@@ -112,7 +112,7 @@ describe('LexResponseHelper', function() {
 					"type": "Close",
 					"fulfillmentState": "Fulfilled",
 					"message": {
-						"contentType": "PlainText or SSML",
+						"contentType": "PlainText",
 						"content": message
 					}
 				}
