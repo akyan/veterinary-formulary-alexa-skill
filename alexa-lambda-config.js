@@ -4,6 +4,7 @@ module.exports = {
 	region: 'eu-west-1',
 	handler: 'alexa-lambda.handler',
 	role: 'arn:aws:iam::979779020614:role/ElectronicVeterinaryAssistantRole',
+	accountId: 979779020614,
 	functionName: 'ElectronicVeterinaryAssistantAlexaSkill',
 	timeout: 10,
 	memorySize: 128,

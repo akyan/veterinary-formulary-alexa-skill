@@ -4,6 +4,7 @@ var del = require('del');
 var install = require('gulp-install');
 var runSequence = require('run-sequence');
 var awsLambda = require("node-aws-lambda");
+var AWS = require('aws-sdk');
 
 gulp.task('clean', function() {
 	return del(['./dist', './dist.zip']);
@@ -52,6 +53,23 @@ gulp.task('upload-alexa-lambda', function(callback) {
 
 gulp.task('upload-lex-lambda', function(callback) {
 	awsLambda.deploy('./dist.zip', require("./lex-lambda-config.js"), callback);
+});
+
+gulp.task('lex-lambda-apply-permissions', function() {
+	var lexLambdaConfig = require('./lex-lambda-config');
+	var lambda = new AWS.Lambda({region: lexLambdaConfig.region});
+
+	console.log('Add New Permission');
+	lambda.addPermission({
+		Action: "lambda:invokeFunction",
+		FunctionName: lexLambdaConfig.functionName,
+		Principal: "lex.amazonaws.com",
+		SourceArn: "arn:aws:lex:" + lexLambdaConfig.region + ":" + lexLambdaConfig.accountId + ":intent:*:*",
+		StatementId: "ElectronicVeterinaryAssistant"
+	}, function(err, data) {
+		if (err) console.log(err, err.stack); // an error occurred
+		else console.log(data);           // successful response
+	});
 });
 
 gulp.task('deploy-alexa-lambda', function(callback) {

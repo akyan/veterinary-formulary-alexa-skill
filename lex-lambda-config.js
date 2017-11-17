@@ -4,6 +4,7 @@ module.exports = {
 	region: 'us-east-1',
 	handler: 'lex-lambda.handler',
 	role: 'arn:aws:iam::979779020614:role/ElectronicVeterinaryAssistantRole',
+	accountId: 979779020614,
 	functionName: 'ElectronicVeterinaryAssistantLexFunction',
 	timeout: 10,
 	memorySize: 128,

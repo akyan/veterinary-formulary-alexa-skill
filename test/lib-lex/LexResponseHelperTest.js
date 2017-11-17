@@ -53,7 +53,7 @@ describe('LexResponseHelper', function() {
 					"type": "Close",
 					"fulfillmentState": "Failed",
 					"message": {
-						"contentType": "PlainText or SSML",
+						"contentType": "PlainText",
 						"content": message
 					}
 				}
@@ -81,7 +81,7 @@ describe('LexResponseHelper', function() {
 					"type": "Close",
 					"fulfillmentState": "Failed",
 					"message": {
-						"contentType": "PlainText or SSML",
+						"contentType": "PlainText",
 						"content": message
 					}
 				}

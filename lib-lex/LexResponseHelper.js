@@ -15,7 +15,7 @@ LexResponseHelper.prototype.fail = function (message, exception) {
 			"type": "Close",
 			"fulfillmentState": "Failed",
 			"message": {
-				"contentType": "PlainText or SSML",
+				"contentType": "PlainText",
 				"content": message
 			}
 		}
@@ -40,7 +40,7 @@ LexResponseHelper.prototype.fulfill = function (message) {
 			"type": "Close",
 			"fulfillmentState": "Fulfilled",
 			"message": {
-				"contentType": "PlainText or SSML",
+				"contentType": "PlainText",
 				"content": message
 			}
 		}
