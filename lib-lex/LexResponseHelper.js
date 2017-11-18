@@ -1,7 +1,7 @@
 'use strict';
-
 function LexResponseHelper(log, sessionAttributes, callback) {
 	this.log = log;
+	this.log.object = 'LexResponseHelper';
 	this.sessionAttributes = sessionAttributes;
 	this.callback = callback;
 }

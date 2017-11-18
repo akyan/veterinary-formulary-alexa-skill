@@ -29,6 +29,7 @@ describe('Drug', function() {
 			expect(subject.name).to.equal('Buprenorphine');
 			expect(subject.doseRate).to.equal(0.2);
 			expect(subject.concentration).to.equal(0.3);
+			expect(subject.log.object).to.be.equal('Drug');
 		});
 	});
 

@@ -21,6 +21,15 @@ describe('DrugQueryResponder', function() {
 
 	});
 
+	describe('#constructor', function() {
+		it('sets log class successfully', function() {
+			subject = new DrugQueryResponder(log, {});
+
+			expect(subject.log).to.be.equal(log);
+			expect(subject.log.object).to.be.equal('DrugQueryResponder');
+		})
+	});
+
 	describe('#calculateDrugDose', function() {
 		it('calculates drug dose when drug found', function() {
 			log.info = sinon.spy();

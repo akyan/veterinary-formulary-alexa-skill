@@ -11,7 +11,7 @@ var LogHelper = require('../../../lib/LogHelper');
 
 describe('DrugLibrary', function() {
 	var subject;
-	var logger;
+	var logger = {};
 	var bupfact;
 
 	before(function () {
@@ -29,6 +29,11 @@ describe('DrugLibrary', function() {
 			"concentration": 0.3
 		};
 
+	});
+
+	describe('#constructor with correct logger label', function () {
+		subject = new DrugLibrary({}, []);
+		expect(subject.log.object).to.be.equal('DrugLibrary');
 	});
 
 	describe('#findByName', function() {
@@ -65,8 +70,9 @@ describe('DrugLibrary', function() {
 			var logger = {};
 			var drugLibrary = DrugLibrary.build(logger, [bupfact]);
 			var map = {};
-			map[bupfact.name] = new Drug(new LogHelper({}, 'Drug'), bupfact);
+			map[bupfact.name] = new Drug(new LogHelper({}), bupfact);
 			expect(drugLibrary.map).to.deep.eq(map);
+			expect(drugLibrary.log.object).to.be.equal('DrugLibrary');
 		});
 	});
 

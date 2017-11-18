@@ -28,6 +28,7 @@ describe('DrugLegalCategory', function() {
 			expect(subject.code).to.equal(code);
 			expect(subject.name).to.equal(name);
 			expect(subject.authorisedDispensers).to.deep.equal(authorisedDispensers);
+			expect(subject.log.object).to.be.equal('DrugLegalCategory');
 		});
 	});
 

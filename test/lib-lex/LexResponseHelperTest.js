@@ -31,6 +31,7 @@ describe('LexResponseHelper', function() {
 			subject = new LexResponseHelper(log, sessionAttributes, callback);
 
 			expect(subject.log).to.equal(log);
+			expect(subject.log.object).to.be.equal('LexResponseHelper');
 			expect(subject.sessionAttributes).to.equal(sessionAttributes);
 			expect(subject.callback).to.equal(callback);
 			expect(log.warn).to.not.be.called;

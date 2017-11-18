@@ -7,7 +7,7 @@ const LexResponseHandler = require('./lib-lex/LexResponseHelper');
 exports.handler = function (event, context, callback) {
 	var logger = bunyan.createLogger({name: 'eva-lex-function', requestId: context.awsRequestId});
 	var log = new LogHelper(logger, 'lex-lambda');
-	var lrh = new LexResponseHandler(new LogHelper(logger, 'LexResponseHandler'), event.sessionAttributes, callback);
+	var lrh = new LexResponseHandler(new LogHelper(logger), event.sessionAttributes, callback);
 
 	var customLogLevel = process.env['LOG_LEVEL'];
 	if (typeof customLogLevel !== 'undefined')

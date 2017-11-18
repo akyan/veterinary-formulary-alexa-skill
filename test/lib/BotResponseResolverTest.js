@@ -26,6 +26,7 @@ describe('LexResponseResolver', function() {
 	describe('#constructor', function() {
 		it('successfully stores inputs', function() {
 			expect(subject.log).to.equal(log);
+			expect(subject.log.object).to.be.equal('BotResponseResolver');
 		});
 	});
 
