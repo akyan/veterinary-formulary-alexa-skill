@@ -2,17 +2,26 @@ const chai = require('chai');
 const sinon = require('sinon');
 const expect = chai.expect;
 chai.use(require('sinon-chai'));
+const path = require('path');
+const fs = require('fs');
 
 let lexLambda = require('../lex-lambda');
 
 describe('lex-lambda', function() {
+	let input;
+	let event;
+	let context;
+	let callback;
+
+	beforeEach(function () {
+		input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
+		event = input.event;
+		context = input.context;
+		callback = sinon.spy();
+	});
+
 	describe('handler', function() {
 		it('successfully responds for VeterinaryDrugLegalCategoryAcronymIntent', function() {
-			let input = require('./lib-lex/responders/data/DrugLegalCategoryAcryonmIntentExample.json');
-			let event = input.event;
-			let context = input.context;
-			let callback = sinon.spy();
-
 			lexLambda.handler(event, context, callback);
 
 			expect(callback).to.be.calledOnce;
@@ -24,6 +33,26 @@ describe('lex-lambda', function() {
 					"message": {
 						"contentType": "PlainText",
 						"content": "POM-V means Prescription Only Medicine - Veterinarian."
+					}
+				}
+			})
+		});
+
+		it('successfully responds to invalid intent', function() {
+			event.currentIntent.name = 'test';
+
+			lexLambda.handler(event, context, callback);
+
+			expect(callback).to.be.calledOnce;
+			expect(callback.args[0][0].message).to.be.equal('The intent test does not have a resolver registered.');
+			expect(callback.args[0][1]).to.be.deep.equal({
+				"sessionAttributes": {},
+				"dialogAction": {
+					"type": "Close",
+					"fulfillmentState": "Failed",
+					"message": {
+						"contentType": "PlainText",
+						"content": "Something unexpected happened, so I am unable to answer your question."
 					}
 				}
 			})

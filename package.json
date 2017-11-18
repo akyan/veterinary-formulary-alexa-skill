@@ -4,7 +4,7 @@
   "description": "A lambda based Alexa and Lex service that responds to queries about vetenary drugs.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha"
   },
   "author": "James Gawn",
   "license": "CC-BY-NC-ND-4.0",
@@ -24,6 +24,7 @@
     "mocha": "^4.0.1",
     "nock": "^9.0.27",
     "node-aws-lambda": "^0.1.8",
+    "nyc": "^11.3.0",
     "run-sequence": "^2.2.0",
     "sinon": "^4.1.1",
     "sinon-chai": "^2.14.0"

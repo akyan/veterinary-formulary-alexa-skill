@@ -1,6 +1,8 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const expect = chai.expect;
+const path = require('path');
+const fs = require('fs');
 chai.use(require('sinon-chai'));
 
 const DrugLegalCategoryAcronymIntentResponder = require('../../../lib-lex/responders/DrugLegalCategoryAcronymIntentResponder');
@@ -9,7 +11,7 @@ describe('DrugLegalCategoryAcronymIntentResponder', function() {
 	let subject;
 	let log;
 	let lrh;
-	let input = require ('./data/DrugLegalCategoryAcryonmIntentExample.json');
+	let input;
 
 	beforeEach(function () {
 		log = { };
@@ -21,6 +23,7 @@ describe('DrugLegalCategoryAcronymIntentResponder', function() {
 		lrh.fulfill = sinon.spy();
 		dlcl = {};
 		subject = new DrugLegalCategoryAcronymIntentResponder(log, dlcl);
+		input = JSON.parse(fs.readFileSync(path.join(__dirname + '/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
 	});
 
 	describe('#constructor', function() {

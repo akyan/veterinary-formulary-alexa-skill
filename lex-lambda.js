@@ -34,7 +34,7 @@ exports.handler = function (event, context, callback) {
 		responder.respond(event, context, lexResponseHandler);
 
 	} catch (err) {
-		lexResponseHandler.fail('Something unexpected happened, so I can\t help your right now.');
+		lexResponseHandler.fail('Something unexpected happened, so I am unable to answer your question.', err);
 		log.error('handler', err);
 	}
 };
