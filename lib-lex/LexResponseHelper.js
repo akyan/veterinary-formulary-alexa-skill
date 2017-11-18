@@ -9,7 +9,7 @@ function LexResponseHelper(log, sessionAttributes, callback) {
 LexResponseHelper.prototype.fail = function (message, exception) {
 	this.log.warn('fail', {message: message, exception: exception});
 
-	var response = {
+	let response = {
 		sessionAttributes: this.sessionAttributes,
 		dialogAction: {
 			"type": "Close",
@@ -34,7 +34,7 @@ LexResponseHelper.prototype.fail = function (message, exception) {
 LexResponseHelper.prototype.fulfill = function (message) {
 	this.log.info('fulfill', {message: message});
 
-	var response = {
+	let response = {
 		sessionAttributes: this.sessionAttributes,
 		dialogAction: {
 			"type": "Close",

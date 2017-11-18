@@ -1,14 +1,14 @@
-var nock = require('nock');
-var chai = require('chai');
-var sinon = require('sinon');
-var expect = chai.expect;
+const nock = require('nock');
+const chai = require('chai');
+const sinon = require('sinon');
+const expect = chai.expect;
 chai.use(require('sinon-chai'));
 
-var LexResponseResolver = require('../../lib/BotResponseResolver');
+const LexResponseResolver = require('../../lib/BotResponseResolver');
 
 describe('LexResponseResolver', function() {
-	var subject;
-	var log;
+	let subject;
+	let log;
 
 	before(function () {
 		nock.disableNetConnect();
@@ -35,7 +35,7 @@ describe('LexResponseResolver', function() {
 
 			subject.add('intenttest', 'path');
 
-			var fact = subject.responderMap['intenttest'];
+			let fact = subject.responderMap['intenttest'];
 
 			expect(fact).to.be.equal('path');
 			expect(log.error).to.not.be.calledOnce;
@@ -47,7 +47,7 @@ describe('LexResponseResolver', function() {
 			subject.add('intenttest', 'path');
 			subject.add('intenttest', 'path2');
 
-			var fact = subject.responderMap['intenttest'];
+			let fact = subject.responderMap['intenttest'];
 
 			expect(fact).to.be.equal('path');
 			expect(log.error).to.be.calledOnce;
@@ -59,12 +59,11 @@ describe('LexResponseResolver', function() {
 
 	describe('#resolve', function() {
 		it('should resolve intent responder successfully if available', function() {
-			var intenttestresolver = require('../data/sampleintentresolver');
-			subject.add('intenttest', '../test/data/sampleintentresolver');
+			subject.add('intenttest', 'intentresolver');
 
-			var resolver = subject.resolve('intenttest');
+			let resolver = subject.resolve('intenttest');
 
-			expect(intenttestresolver).to.be.equal(resolver);
+			expect(resolver).to.be.equal('intentresolver');
 			expect(log.error).to.not.be.called;
 			expect(log.info).to.be.calledTwice;
 			expect(log.info).to.be.calledWith('add', 'Added resolver for intent: ' + 'intenttest');
