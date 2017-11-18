@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var expect = chai.expect;
 chai.use(require('sinon-chai'));
 
-var DrugQueryResponder = require('../../../lib/drug/DrugQueryResponder');
+var DrugQueryResponder = require('../../../lib/drug/DrugQueryHelper');
 
 describe('DrugQueryResponder', function() {
 	var subject;
