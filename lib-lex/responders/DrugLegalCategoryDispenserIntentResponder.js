@@ -19,7 +19,7 @@ class DrugLegalCategoryDispenserIntentResponder extends IntentResponder {
 		let drugLegalCategory = this.drugLegalCategoryLibrary.findByCode(drugLegalCategoryCode);
 
 		this.log.info('respond', 'Supplied response for ' + this.intent + ' with drug legal category ' + drugLegalCategoryCode);
-		lrh.fulfill(drugLegalCategoryCode + ' can be dispensed by a ' + drugLegalCategory.dispensers + '.');
+		lrh.fulfill(drugLegalCategoryCode + ' can be dispensed by ' + drugLegalCategory.dispensers + '.');
 	};
 }
 

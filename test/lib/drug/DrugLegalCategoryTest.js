@@ -39,7 +39,7 @@ describe('DrugLegalCategory', function() {
 			const authorisedDispensers = ['Bob'];
 			subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
 
-			expect(subject.dispensers).to.be.equal('Bob');
+			expect(subject.dispensers).to.be.equal('a Bob');
 		});
 
 		it('successfully returns a two dispensers will formatted', function() {
@@ -48,7 +48,7 @@ describe('DrugLegalCategory', function() {
 			const authorisedDispensers = ['Bob', 'Charles'];
 			subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
 
-			expect(subject.dispensers).to.be.equal('Bob, and Charles');
+			expect(subject.dispensers).to.be.equal('Bob, or a Charles');
 		});
 
 		it('successfully returns a multiple dispensers will formatted', function() {
@@ -57,7 +57,7 @@ describe('DrugLegalCategory', function() {
 			const authorisedDispensers = ['Bob', 'James', 'Charles'];
 			subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
 
-			expect(subject.dispensers).to.be.equal('Bob, James, and Charles');
+			expect(subject.dispensers).to.be.equal('Bob, a James, or a Charles');
 		});
 	});
 
