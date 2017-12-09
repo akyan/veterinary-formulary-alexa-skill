@@ -1,16 +1,16 @@
-var nock = require('nock');
-var chai = require('chai');
-var sinon = require('sinon');
-var expect = chai.expect;
+const nock = require('nock');
+const chai = require('chai');
+const sinon = require('sinon');
+const expect = chai.expect;
 chai.use(require('sinon-chai'));
 
-var LexResponseHelper = require('../../lib-lex/LexResponseHelper');
+const LexResponseHelper = require('../../lib-lex/LexResponseHelper');
 
 describe('LexResponseHelper', function() {
-	var subject;
-	var log;
-	var callback;
-	var sessionAttributes;
+	let subject;
+	let log;
+	let callback;
+	let sessionAttributes;
 
 	before(function () {
 		nock.disableNetConnect();
@@ -42,13 +42,13 @@ describe('LexResponseHelper', function() {
 	describe('#fail', function() {
 		it('should send closure request with exception', function() {
 			sessionAttributes = "TestAttributes";
-			var message = 'blah';
-			var exception = {
+			const message = 'blah';
+			const exception = {
 				error: 'blah'
 			};
 			subject = new LexResponseHelper(log, sessionAttributes, callback);
 
-			var response = {
+			const response = {
 				sessionAttributes: sessionAttributes,
 				dialogAction: {
 					"type": "Close",
@@ -72,11 +72,11 @@ describe('LexResponseHelper', function() {
 
 		it('should send closure request without exception', function() {
 			sessionAttributes = "TestAttributes";
-			var message = 'blah';
-			var exception = undefined;
+			const message = 'blah';
+			const exception = undefined;
 			subject = new LexResponseHelper(log, sessionAttributes, callback);
 
-			var response = {
+			const response = {
 				sessionAttributes: sessionAttributes,
 				dialogAction: {
 					"type": "Close",
@@ -103,11 +103,11 @@ describe('LexResponseHelper', function() {
 	describe('#fulfill', function() {
 		it('should send closure request with fulfill status', function() {
 			sessionAttributes = "TestAttributes";
-			var message = 'blah';
+			const message = 'blah';
 
 			subject = new LexResponseHelper(log, sessionAttributes, callback);
 
-			var response = {
+			const response = {
 				sessionAttributes: sessionAttributes,
 				dialogAction: {
 					"type": "Close",

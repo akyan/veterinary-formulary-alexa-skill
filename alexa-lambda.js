@@ -43,7 +43,7 @@ const BuiltInIntentHandler = function (logger) {
 			log.info('DrugDoseCalulatorIntent', 'Weight Integer: ' + this.attribute['WEIGHTINTEGER']);
 			log.info('DrugDoseCalulatorIntent', 'Weight Decimal: ' + this.attribute['WEIGHTDECIMAL']);
 
-			var weight = this.attribute['WEIGHTINTEGER'] + (this.attribute['WEIGHTDECIMAL'] / 10);
+			let weight = this.attribute['WEIGHTINTEGER'] + (this.attribute['WEIGHTDECIMAL'] / 10);
 			log.info('DrugDoseCalulatorIntent', 'Weight: ' + weight);
 
 			this.emit(':tell', 'The blah does for an ' + this.attributes['ANIMAL'] + 'weighing ' + weight + ' kilograms');
@@ -69,10 +69,10 @@ const BuiltInIntentHandler = function (logger) {
 };
 
 exports.handler = function (event, context) {
-	var logger = bunyan.createLogger({name: 'eva-alexa-function', requestId: context.awsRequestId});
-	var log = new LogHelper(logger, 'alexa-lambda');
+	let logger = bunyan.createLogger({name: 'eva-alexa-function', requestId: context.awsRequestId});
+	let log = new LogHelper(logger, 'alexa-lambda');
 
-	var customLogLevel = process.env['LOG_LEVEL'];
+	let customLogLevel = process.env['LOG_LEVEL'];
 	if (typeof customLogLevel !== 'undefined')
 	{
 		if (customLogLevel === 'trace' || customLogLevel === 'debug' || customLogLevel === 'info' || customLogLevel === 'warn' || customLogLevel === 'error' || customLogLevel === 'fatal')

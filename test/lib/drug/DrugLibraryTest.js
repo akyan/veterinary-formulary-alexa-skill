@@ -1,18 +1,18 @@
-var nock = require('nock');
-var chai = require('chai');
-var sinon = require('sinon');
-var expect = chai.expect;
+const nock = require('nock');
+const chai = require('chai');
+const sinon = require('sinon');
+const expect = chai.expect;
 chai.use(require('sinon-chai'));
 
 
-var DrugLibrary = require('../../../lib/drug/DrugLibrary');
-var Drug = require('../../../lib/drug/Drug');
-var LogHelper = require('../../../lib/LogHelper');
+const DrugLibrary = require('../../../lib/drug/DrugLibrary');
+const Drug = require('../../../lib/drug/Drug');
+const LogHelper = require('../../../lib/LogHelper');
 
 describe('DrugLibrary', function() {
-	var subject;
-	var logger = {};
-	var bupfact;
+	let subject;
+	const logger = {};
+	let bupfact;
 
 	before(function () {
 		nock.disableNetConnect();
@@ -39,7 +39,7 @@ describe('DrugLibrary', function() {
 	describe('#findByName', function() {
 		it('returns drug if found in library', function() {
 			subject = new DrugLibrary(libraryLogger, [new Drug(logger, bupfact)]);
-			var bup = subject.findByName('Buprenorphine');
+			const bup = subject.findByName('Buprenorphine');
 
 			expect(bup.name).to.equal(bupfact.name);
 			expect(bup.concentration).to.equal(bupfact.concentration);
@@ -52,7 +52,7 @@ describe('DrugLibrary', function() {
 
 		it('returns undefined and logs warning if not found in library', function() {
 			subject = new DrugLibrary(libraryLogger, [new Drug(logger, bupfact)]);
-			var bup = subject.findByName('3151');
+			const bup = subject.findByName('3151');
 
 			expect(bup).to.equal(undefined);
 			expect(libraryLogger.info).to.be.calledOnce;
@@ -67,9 +67,9 @@ describe('DrugLibrary', function() {
 	describe('#build', function() {
 		it('successfully adapt raw drugs into drug objects and construct library', function() {
 
-			var logger = {};
-			var drugLibrary = DrugLibrary.build(logger, [bupfact]);
-			var map = {};
+			const logger = {};
+			const drugLibrary = DrugLibrary.build(logger, [bupfact]);
+			const map = {};
 			map[bupfact.name] = new Drug(new LogHelper({}), bupfact);
 			expect(drugLibrary.map).to.deep.eq(map);
 			expect(drugLibrary.log.object).to.be.equal('DrugLibrary');

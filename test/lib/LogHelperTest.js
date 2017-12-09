@@ -1,17 +1,17 @@
-var nock = require('nock');
-var chai = require('chai');
-var sinon = require('sinon');
-var expect = chai.expect;
+const nock = require('nock');
+const chai = require('chai');
+const sinon = require('sinon');
+const expect = chai.expect;
 chai.use(require('sinon-chai'));
 
-var LogHelper = require('../../lib/LogHelper');
+const LogHelper = require('../../lib/LogHelper');
 
 describe('LogHelper', function() {
-	var subject;
-	var logger;
-	var object = "TestClass";
-	var method = "TestMethod";
-	var message = {message: "blah"};
+	let subject;
+	let logger;
+	const object = "TestClass";
+	const method = "TestMethod";
+	const message = {message: "blah"};
 
 	before(function () {
 		nock.disableNetConnect();

@@ -1,15 +1,15 @@
-var nock = require('nock');
-var chai = require('chai');
-var sinon = require('sinon');
-var expect = chai.expect;
+const nock = require('nock');
+const chai = require('chai');
+const sinon = require('sinon');
+const expect = chai.expect;
 chai.use(require('sinon-chai'));
 
-var DrugQueryResponder = require('../../../lib/drug/DrugQueryHelper');
+const DrugQueryResponder = require('../../../lib/drug/DrugQueryHelper');
 
 describe('DrugQueryResponder', function() {
-	var subject;
-	var log;
-	var drugLibrary;
+	let subject;
+	let log;
+	let drugLibrary;
 
 	before(function () {
 		nock.disableNetConnect();
@@ -33,15 +33,15 @@ describe('DrugQueryResponder', function() {
 	describe('#calculateDrugDose', function() {
 		it('calculates drug dose when drug found', function() {
 			log.info = sinon.spy();
-			var drugName = 'blah';
-			var weight = 4;
-			var drugStub = {};
+			const drugName = 'blah';
+			const weight = 4;
+			const drugStub = {};
 			drugStub.calculateDose = sinon.stub().withArgs(weight).returns(0.4);
 			drugLibrary.findDrugByName = sinon.stub();
 			drugLibrary.findDrugByName.withArgs(drugName).returns(drugStub);
 			subject = new DrugQueryResponder(log, drugLibrary);
 
-			var response = subject.calculateDrugDose('blah', 4);
+			const response = subject.calculateDrugDose('blah', 4);
 			expect(response).to.be.equal(0.4);
 			expect(drugStub.calculateDose).to.be.calledOnce;
 			expect(drugLibrary.findDrugByName).to.be.calledOnce;
@@ -51,12 +51,12 @@ describe('DrugQueryResponder', function() {
 		it('returns undefined and logs warning when drug not found', function() {
 			log.info = sinon.spy();
 			log.warn = sinon.spy();
-			var drugName = 'blah';
+			const drugName = 'blah';
 			drugLibrary.findDrugByName = sinon.stub();
 			drugLibrary.findDrugByName.withArgs(drugName).returns(undefined);
 			subject = new DrugQueryResponder(log, drugLibrary);
 
-			var response = subject.calculateDrugDose('blah', 4);
+			const response = subject.calculateDrugDose('blah', 4);
 			expect(response).to.be.equal(undefined);
 			expect(drugLibrary.findDrugByName).to.be.calledOnce;
 			expect(log.info).to.be.calledOnce;

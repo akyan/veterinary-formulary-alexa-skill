@@ -1,10 +1,10 @@
-var gulp = require('gulp');
-var zip = require('gulp-zip');
-var del = require('del');
-var install = require('gulp-install');
-var runSequence = require('run-sequence');
-var awsLambda = require("node-aws-lambda");
-var AWS = require('aws-sdk');
+let gulp = require('gulp');
+let zip = require('gulp-zip');
+let del = require('del');
+let install = require('gulp-install');
+let runSequence = require('run-sequence');
+let awsLambda = require("node-aws-lambda");
+let AWS = require('aws-sdk');
 
 gulp.task('clean', function() {
 	return del(['./dist', './dist.zip']);
@@ -56,8 +56,8 @@ gulp.task('upload-lex-lambda', function(callback) {
 });
 
 gulp.task('lex-lambda-apply-permissions', function() {
-	var lexLambdaConfig = require('./lex-lambda-config');
-	var lambda = new AWS.Lambda({region: lexLambdaConfig.region});
+	let lexLambdaConfig = require('./lex-lambda-config');
+	let lambda = new AWS.Lambda({region: lexLambdaConfig.region});
 
 	console.log('Add New Permission');
 	lambda.addPermission({

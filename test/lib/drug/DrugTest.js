@@ -1,14 +1,14 @@
-var nock = require('nock');
-var chai = require('chai');
-var sinon = require('sinon');
-var expect = chai.expect;
+const nock = require('nock');
+const chai = require('chai');
+const sinon = require('sinon');
+const expect = chai.expect;
 chai.use(require('sinon-chai'));
 
-var Drug = require('../../../lib/drug/Drug');
+const Drug = require('../../../lib/drug/Drug');
 
 describe('Drug', function() {
-	var subject;
-	var log;
+	let subject;
+	let log;
 
 	before(function () {
 		nock.disableNetConnect();
@@ -36,7 +36,7 @@ describe('Drug', function() {
 	describe('#calculateDose', function () {
 		it('calculates correct dose', function() {
 			log.info = sinon.spy();
-			var dose = subject.calculateDose(4);
+			const dose = subject.calculateDose(4);
 			expect(dose).to.equal(2.666666666666667);
 			expect(log.info).to.be.calledWith('calculateDose', 'Calculating dose for Buprenorphine for animal with weight 4');
 		});
