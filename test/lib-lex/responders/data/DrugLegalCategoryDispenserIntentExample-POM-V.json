@@ -1,0 +1,44 @@
+{
+	"event": {
+		"messageVersion": "1.0",
+		"invocationSource": "FulfillmentCodeHook",
+		"userId": "i1wwg7v74u1mts4zbmergt05aj3ks25k",
+		"sessionAttributes": {},
+		"requestAttributes": null,
+		"bot": {
+			"name": "ElectronicVeterinaryAssistant",
+			"alias": "$LATEST",
+			"version": "$LATEST"
+		},
+		"outputDialogMode": "Text",
+		"currentIntent": {
+			"name": "VeterinaryDrugLegalCategoryDispenserIntent",
+			"slots": {
+				"DrugLegalCategory": "POM-V"
+			},
+			"slotDetails": {
+				"DrugLegalCategory": {
+					"resolutions": [
+						{
+							"value": "POM-V"
+						}
+					],
+					"originalValue": "POM-V"
+				}
+			},
+			"confirmationStatus": "None"
+		},
+		"inputTranscript": "Who can dispense POM-V?"
+	},
+	"context": {
+		"callbackWaitsForEmptyEventLoop": true,
+		"logGroupName": "/aws/lambda/ElectronicVeterinaryAssistantLexFunction",
+		"logStreamName": "2017/11/17/[$LATEST]bb4213db7f5e43ed954cf96b29c11048",
+		"functionName": "ElectronicVeterinaryAssistantLexFunction",
+		"memoryLimitInMB": "128",
+		"functionVersion": "$LATEST",
+		"invokeid": "25a1c944-cbdd-11e7-8638-c93d30b72aa3",
+		"awsRequestId": "25a1c944-cbdd-11e7-8638-c93d30b72aa3",
+		"invokedFunctionArn": "arn:aws:lambda:us-east-1:979779020614:function:ElectronicVeterinaryAssistantLexFunction"
+	}
+}

@@ -6,6 +6,7 @@ const LexResponseHandler = require('./lib-lex/LexResponseHelper');
 
 const BotResponseResolver = require('./lib/BotResponseResolver');
 const DrugLegalCategoryAcronymIntentResponder = require('./lib-lex/responders/DrugLegalCategoryAcronymIntentResponder');
+const DrugLegalCategoryDispenserIntentResponder = require('./lib-lex/responders/DrugLegalCategoryDispenserIntentResponder');
 const DrugLegalCategoryLibrary = require('./lib/drug/DrugLegalCategoryLibrary');
 
 exports.handler = function (event, context, callback) {
@@ -29,6 +30,7 @@ exports.handler = function (event, context, callback) {
 
 		let brr = new BotResponseResolver(new LogHelper(logger));
 		brr.add('VeterinaryDrugLegalCategoryAcronymIntent', new DrugLegalCategoryAcronymIntentResponder(new LogHelper(logger), drugLegalCategoryLibrary));
+		brr.add('VeterinaryDrugLegalCategoryDispenserIntent', new DrugLegalCategoryDispenserIntentResponder(new LogHelper(logger), drugLegalCategoryLibrary));
 
 		let responder = brr.resolve(event.currentIntent.name);
 		responder.respond(event, context, lexResponseHandler);

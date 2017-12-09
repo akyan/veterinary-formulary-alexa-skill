@@ -32,6 +32,35 @@ describe('DrugLegalCategory', function() {
 		});
 	});
 
+	describe('dispensers', function() {
+		it('successfully returns a single dispenser', function() {
+			const code = "TEST-Code";
+			const name = "Test Name";
+			const authorisedDispensers = ['Bob'];
+			subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
+
+			expect(subject.dispensers).to.be.equal('Bob');
+		});
+
+		it('successfully returns a two dispensers will formatted', function() {
+			const code = "TEST-Code";
+			const name = "Test Name";
+			const authorisedDispensers = ['Bob', 'Charles'];
+			subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
+
+			expect(subject.dispensers).to.be.equal('Bob, and Charles');
+		});
+
+		it('successfully returns a multiple dispensers will formatted', function() {
+			const code = "TEST-Code";
+			const name = "Test Name";
+			const authorisedDispensers = ['Bob', 'James', 'Charles'];
+			subject = new DrugLegalCategory(log, code, name, authorisedDispensers);
+
+			expect(subject.dispensers).to.be.equal('Bob, James, and Charles');
+		});
+	});
+
 	after(function () {
 		nock.enableNetConnect();
 	});

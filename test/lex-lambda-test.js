@@ -14,14 +14,15 @@ describe('lex-lambda', function() {
 	let callback;
 
 	beforeEach(function () {
-		input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
-		event = input.event;
-		context = input.context;
 		callback = sinon.spy();
 	});
 
 	describe('handler', function() {
 		it('successfully responds for VeterinaryDrugLegalCategoryAcronymIntent', function() {
+			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
+			event = input.event;
+			context = input.context;
+
 			lexLambda.handler(event, context, callback);
 
 			expect(callback).to.be.calledOnce;
@@ -38,7 +39,31 @@ describe('lex-lambda', function() {
 			})
 		});
 
+		it('successfully responds for VeterinaryDrugLegalCategoryDispenserIntent', function() {
+			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryDispenserIntentExample-POM-V.json'), 'utf8'));
+			event = input.event;
+			context = input.context;
+
+			lexLambda.handler(event, context, callback);
+
+			expect(callback).to.be.calledOnce;
+			expect(callback).to.be.calledWith(null, {
+				"sessionAttributes": {},
+				"dialogAction": {
+					"type": "Close",
+					"fulfillmentState": "Fulfilled",
+					"message": {
+						"contentType": "PlainText",
+						"content": "POM-V can be dispensed by a Veterinarian."
+					}
+				}
+			})
+		});
+
 		it('successfully responds to invalid intent', function() {
+			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
+			event = input.event;
+			context = input.context;
 			event.currentIntent.name = 'test';
 
 			lexLambda.handler(event, context, callback);
