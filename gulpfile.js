@@ -7,7 +7,7 @@ let awsLambda = require("node-aws-lambda");
 let AWS = require('aws-sdk');
 
 gulp.task('clean', function() {
-	return del(['./dist', './dist.zip']);
+	return del(['./dist', './dist.zip', './nyc_output']);
 });
 
 gulp.task('copy-data', function() {
@@ -83,12 +83,19 @@ gulp.task('deploy-alexa-lambda', function(callback) {
 	);
 });
 
-gulp.task('deploy-lex-lambda', function(callback) {
+gulp.task('build-lex-lambda', function(callback) {
 	return runSequence(
 		['clean'],
 		['copy-lib-shared', 'copy-data', 'copy-lib-lex', 'copy-lex-lambda'],
 		['node-mods'],
 		['zip'],
+		callback
+	);
+});
+
+gulp.task('deploy-lex-lambda', function(callback) {
+	return runSequence(
+		['build-lex-lambda'],
 		['upload-lex-lambda'],
 		callback
 	);

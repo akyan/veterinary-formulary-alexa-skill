@@ -4,7 +4,8 @@
   "description": "A lambda based Alexa and Lex service that responds to queries about vetenary drugs.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+	"buildLex": "gulp build-lex-lambda"
   },
   "author": "James Gawn",
   "license": "CC-BY-NC-ND-4.0",
