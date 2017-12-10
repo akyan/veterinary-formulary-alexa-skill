@@ -16,7 +16,12 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - run:
+          name: Build Lex Bundle
+          command: npm run buildLex
   test:
+    working_directory: ~/repo
+
     docker:
       - image: circleci/node:6.10
     steps:
