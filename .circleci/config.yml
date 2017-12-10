@@ -7,15 +7,7 @@ jobs:
       - image: circleci/node:6.10
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Install NPM
-          command: npm install --dev
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+
       - run:
           name: Build Lex Bundle
           command: npm run buildLex
@@ -26,6 +18,9 @@ jobs:
       - image: circleci/node:6.10
     steps:
       - checkout
+      - run:
+          name: Install NPM (Dev)
+          command: npm install --dev
       - run:
           name: Test
           command: npm test
