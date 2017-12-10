@@ -7,6 +7,7 @@ const IntentResponder = require('../../../lib/responders/IntentResponder');
 describe('IntentResponder', function() {
 	let subject;
 	let log;
+	let responseHandler;
 
 	beforeEach(function () {
 		log = { test: 'blah'};

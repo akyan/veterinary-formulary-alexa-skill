@@ -9,6 +9,7 @@ describe('LexIntentParser', function() {
 	let subject;
 	let lrh;
 	let input = require ('./data/DrugLegalCategoryAcryonmIntentExample.json');
+	let log;
 
 	beforeEach(function () {
 		log = { };
@@ -30,6 +31,12 @@ describe('LexIntentParser', function() {
 	});
 
 	describe('#respond', function() {
+		it('successfully logs parsing request for correct intent', function() {
+			subject.respond({currentIntent: { name: 'Unknown'}}, {});
+
+			expect(log.trace).to.be.calledOnce;
+		});
+
 		it('throw error when receiving response unexpected intent', function() {
 			input.event.currentIntent.name = 'intenttest';
 

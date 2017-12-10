@@ -1,4 +1,3 @@
-const nock = require('nock');
 const chai = require('chai');
 const sinon = require('sinon');
 const expect = chai.expect;
@@ -13,10 +12,7 @@ describe('DrugLibrary', function() {
 	let subject;
 	const logger = {};
 	let bupfact;
-
-	before(function () {
-		nock.disableNetConnect();
-	});
+	let libraryLogger;
 
 	beforeEach(function () {
 		libraryLogger = {};
@@ -76,7 +72,4 @@ describe('DrugLibrary', function() {
 		});
 	});
 
-	after(function () {
-		nock.enableNetConnect();
-	});
 });

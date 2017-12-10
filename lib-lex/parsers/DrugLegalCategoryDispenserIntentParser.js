@@ -10,8 +10,8 @@ class DrugLegalCategoryDispenserIntentParser extends LexIntentParser {
 		this.drugLegalCategoryDispenserIntentResponder = drugLegalCategoryDispenserIntentResponder;
 	}
 
-	respond(event, context, rh) {
-		super.respond(event, context, rh);
+	respond(event, context) {
+		super.respond(event, context);
 		let drugLegalCategoryCode = event.currentIntent.slots.DrugLegalCategory;
 
 		super.checkSlotAvailable("DrugLegalCategory", drugLegalCategoryCode);

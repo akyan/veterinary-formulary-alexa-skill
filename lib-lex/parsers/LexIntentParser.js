@@ -8,14 +8,17 @@ class LexIntentParser {
 		this.intent = 'Unknown';
 	}
 
-	respond(event) {
+	respond(event, context) {
 
 		if (event.currentIntent.name !== this.intent)
 		{
 			this.log.error('respond', 'The intent ' + event.currentIntent.name + ' is not able to be handled by this responder.');
 			throw new Error ('The intent ' + event.currentIntent.name + ' is not able to be handled by this responder.')
 		}
-
+		else
+		{
+			this.log.trace('respond', 'Parsing intent' + this.intent);
+		}
 	};
 
 	checkSlotAvailable(slotName, slotField) {

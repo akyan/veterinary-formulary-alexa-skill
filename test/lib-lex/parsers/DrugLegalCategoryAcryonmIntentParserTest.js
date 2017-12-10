@@ -12,6 +12,7 @@ describe('DrugLegalCategoryAcronymIntentParser', function() {
 	let log;
 	let lrh;
 	let input;
+	let drugLegalCategoryAcronymResponder;
 
 	beforeEach(function () {
 		log = { };

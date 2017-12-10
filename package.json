@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha",
-	"buildLex": "gulp build-lex-lambda"
+    "buildLex": "gulp build-lex-lambda"
   },
   "author": "James Gawn",
   "license": "CC-BY-NC-ND-4.0",
@@ -15,6 +15,7 @@
     "bunyan": "^1.8.12"
   },
   "devDependencies": {
+    "aws-sdk": "^2.167.0",
     "chai": "^4.1.2",
     "del": "^3.0.0",
     "gulp": "^3.9.1",

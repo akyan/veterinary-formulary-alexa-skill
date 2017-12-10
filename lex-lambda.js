@@ -30,7 +30,7 @@ exports.handler = function (event, context, callback) {
 
 	log.info('handler', {event: event, context: context});
 	try {
-		let drugLegalCategoryLibrary = DrugLegalCategoryLibrary.build(new LogHelper(logger), require('./data/drugLegalCategories.json'));
+		let drugLegalCategoryLibrary = DrugLegalCategoryLibrary.build(logger, require('./data/drugLegalCategories.json'));
 
 		let dlcair = new DrugLegalCategoryAcronymIntentResponder(new LogHelper(logger), lexResponseHandler, drugLegalCategoryLibrary);
 		let dlcdir = new DrugLegalCategoryDispenserIntentResponder(new LogHelper(logger), lexResponseHandler, drugLegalCategoryLibrary);

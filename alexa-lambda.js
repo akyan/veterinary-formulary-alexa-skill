@@ -82,7 +82,7 @@ exports.handler = function (event, context) {
 		}
 	}
 
-	log.trace('handler', 'Initialising Skill');
+	log.info('handler', {event: event, context: context});
 
 	const alexa = Alexa.handler(event, context);
 	alexa.appId = APP_ID;

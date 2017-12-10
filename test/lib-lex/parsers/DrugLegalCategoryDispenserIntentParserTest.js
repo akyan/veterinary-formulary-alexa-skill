@@ -47,7 +47,7 @@ describe('DrugLegalCategoryDispenserIntentParser', function() {
 			inputPOMV.event.currentIntent.name = 'VeterinaryDrugLegalCategoryDispenserIntent';
 			delete inputPOMV.event.currentIntent.slots.DrugLegalCategory;
 
-			expect(subject.respond.bind(subject, inputPOMV.event, inputPOMV.context, drugLegalCategoryAcronymResponder)).to.throw(Error, 'The slot DrugLegalCategory wasn\'t defined.');
+			expect(subject.respond.bind(subject, inputPOMV.event, inputPOMV.context, drugLegalCategoryDispenserResponder)).to.throw(Error, 'The slot DrugLegalCategory wasn\'t defined.');
 			expect(log.error).to.be.calledOnce;
 			expect(log.error).to.be.calledWith('checkSlotAvailable', 'The slot DrugLegalCategory wasn\'t defined.');
 		});
