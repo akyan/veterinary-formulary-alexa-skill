@@ -5,9 +5,9 @@ const path = require('path');
 const fs = require('fs');
 chai.use(require('sinon-chai'));
 
-const DrugLegalCategoryAcronymIntentResponder = require('../../../lib-lex/responders/DrugLegalCategoryAcronymIntentResponder');
+const DrugLegalCategoryAcronymIntentResponder = require('../../../lib-lex/parsers/DrugLegalCategoryAcronymIntentParser');
 
-describe('DrugLegalCategoryAcronymIntentResponder', function() {
+describe('DrugLegalCategoryAcronymIntentParser', function() {
 	let subject;
 	let log;
 	let lrh;
@@ -20,30 +20,28 @@ describe('DrugLegalCategoryAcronymIntentResponder', function() {
 		log.info =  sinon.spy();
 		log.error = sinon.spy();
 		lrh = { };
-		lrh.fulfill = sinon.spy();
-		dlcl = {};
-		subject = new DrugLegalCategoryAcronymIntentResponder(log, dlcl);
+		lrh.say = sinon.spy();
+		drugLegalCategoryAcronymResponder = {};
+		drugLegalCategoryAcronymResponder.respond = sinon.spy();
+		subject = new DrugLegalCategoryAcronymIntentResponder(log, drugLegalCategoryAcronymResponder);
 		input = JSON.parse(fs.readFileSync(path.join(__dirname + '/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
 	});
 
 	describe('#constructor', function() {
 		it('successfully stores inputs and sets log object name', function() {
 			expect(subject.log).to.be.equal(log);
-			expect(subject.drugLegalCategoryLibrary).to.be.equals(dlcl);
-			expect(subject.log.object).to.be.equal('DrugLegalCategoryAcronymIntentResponder');
+			expect(subject.drugLegalCategoryAcronymResponder).to.be.equals(drugLegalCategoryAcronymResponder);
+			expect(subject.log.object).to.be.equal('DrugLegalCategoryAcronymIntentParser');
 		});
 	});
 
 	describe('#respond', function() {
 		it('send response when receiving a well formatted response', function() {
 
-			dlcl.findByCode = sinon.stub().withArgs('POM-V').returns({name: 'Prescription Only Medicine - Veterinarian'});
-			subject.respond(input.event, input.context, lrh);
+			subject.respond(input.event, input.context);
 
-			expect(lrh.fulfill).to.be.calledOnce;
-			expect(lrh.fulfill).to.be.calledWith('POM-V means Prescription Only Medicine - Veterinarian.');
-			expect(log.info).to.be.calledOnce;
-			expect(log.info).to.be.calledWith('respond', 'Supplied response for ' + input.event.currentIntent.name + ' with drug legal category ' + input.event.currentIntent.slots.DrugLegalCategory)
+			expect(drugLegalCategoryAcronymResponder.respond).to.be.calledOnce;
+			expect(drugLegalCategoryAcronymResponder.respond).to.be.calledWith('POM-V');
 		});
 
 		it('throw error when not receiving expected drug legal category slot', function() {

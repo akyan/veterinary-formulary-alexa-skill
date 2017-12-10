@@ -19,7 +19,7 @@ describe('lex-lambda', function() {
 
 	describe('handler', function() {
 		it('successfully responds for VeterinaryDrugLegalCategoryAcronymIntent', function() {
-			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
+			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/parsers/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
 			event = input.event;
 			context = input.context;
 
@@ -40,7 +40,7 @@ describe('lex-lambda', function() {
 		});
 
 		it('successfully responds for VeterinaryDrugLegalCategoryDispenserIntent', function() {
-			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryDispenserIntentExample-POM-V.json'), 'utf8'));
+			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/parsers/data/DrugLegalCategoryDispenserIntentExample-POM-V.json'), 'utf8'));
 			event = input.event;
 			context = input.context;
 
@@ -61,7 +61,7 @@ describe('lex-lambda', function() {
 		});
 
 		it('successfully responds to invalid intent', function() {
-			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/responders/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
+			input = JSON.parse(fs.readFileSync(path.join(__dirname + '/lib-lex/parsers/data/DrugLegalCategoryAcryonmIntentExample.json'), 'utf8'));
 			event = input.event;
 			context = input.context;
 			event.currentIntent.name = 'test';

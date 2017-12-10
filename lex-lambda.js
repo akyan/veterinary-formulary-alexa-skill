@@ -5,8 +5,12 @@ const APP_ID = process.env['APP_ID'];
 const LexResponseHandler = require('./lib-lex/LexResponseHelper');
 
 const BotResponseResolver = require('./lib/BotResponseResolver');
-const DrugLegalCategoryAcronymIntentResponder = require('./lib-lex/responders/DrugLegalCategoryAcronymIntentResponder');
-const DrugLegalCategoryDispenserIntentResponder = require('./lib-lex/responders/DrugLegalCategoryDispenserIntentResponder');
+const DrugLegalCategoryAcronymIntentParser = require('./lib-lex/parsers/DrugLegalCategoryAcronymIntentParser');
+const DrugLegalCategoryDispenserIntentParser = require('./lib-lex/parsers/DrugLegalCategoryDispenserIntentParser');
+
+const DrugLegalCategoryAcronymIntentResponder = require('./lib/responders/DrugLegalCategoryAcronymIntentResponder');
+const DrugLegalCategoryDispenserIntentResponder = require('./lib/responders/DrugLegalCategoryDispenserIntentResponder');
+
 const DrugLegalCategoryLibrary = require('./lib/drug/DrugLegalCategoryLibrary');
 
 exports.handler = function (event, context, callback) {
@@ -28,15 +32,18 @@ exports.handler = function (event, context, callback) {
 	try {
 		let drugLegalCategoryLibrary = DrugLegalCategoryLibrary.build(new LogHelper(logger), require('./data/drugLegalCategories.json'));
 
+		let dlcair = new DrugLegalCategoryAcronymIntentResponder(new LogHelper(logger), lexResponseHandler, drugLegalCategoryLibrary);
+		let dlcdir = new DrugLegalCategoryDispenserIntentResponder(new LogHelper(logger), lexResponseHandler, drugLegalCategoryLibrary);
+
 		let brr = new BotResponseResolver(new LogHelper(logger));
-		brr.add('VeterinaryDrugLegalCategoryAcronymIntent', new DrugLegalCategoryAcronymIntentResponder(new LogHelper(logger), drugLegalCategoryLibrary));
-		brr.add('VeterinaryDrugLegalCategoryDispenserIntent', new DrugLegalCategoryDispenserIntentResponder(new LogHelper(logger), drugLegalCategoryLibrary));
+		brr.add('VeterinaryDrugLegalCategoryAcronymIntent', new DrugLegalCategoryAcronymIntentParser(new LogHelper(logger), dlcair));
+		brr.add('VeterinaryDrugLegalCategoryDispenserIntent', new DrugLegalCategoryDispenserIntentParser(new LogHelper(logger), dlcdir));
 
 		let responder = brr.resolve(event.currentIntent.name);
 		responder.respond(event, context, lexResponseHandler);
 
 	} catch (err) {
-		lexResponseHandler.fail('Something unexpected happened, so I am unable to answer your question.', err);
+		lexResponseHandler.error('Something unexpected happened, so I am unable to answer your question.', err);
 		log.error('handler', err);
 	}
 };

@@ -3,9 +3,9 @@ const sinon = require('sinon');
 const expect = chai.expect;
 chai.use(require('sinon-chai'));
 
-const IntentResponder = require('../../../lib-lex/responders/IntentResponder');
+const LexIntentParser = require('../../../lib-lex/parsers/LexIntentParser');
 
-describe('IntentResponder', function() {
+describe('LexIntentParser', function() {
 	let subject;
 	let lrh;
 	let input = require ('./data/DrugLegalCategoryAcryonmIntentExample.json');
@@ -18,13 +18,13 @@ describe('IntentResponder', function() {
 		log.error = sinon.spy();
 		lrh = { };
 		lrh.fulfill = sinon.spy();
-		subject = new IntentResponder(log);
+		subject = new LexIntentParser(log);
 	});
 
 	describe('#constructor', function() {
 		it('successfully stores inputs and sets log object name', function() {
 			expect(subject.log).to.equal(log);
-			expect(subject.log.object).to.be.equal('IntentResponder');
+			expect(subject.log.object).to.be.equal('LexIntentParser');
 			expect(subject.intent).to.be.equal('Unknown');
 		});
 	});

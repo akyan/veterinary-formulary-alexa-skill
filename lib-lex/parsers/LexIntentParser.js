@@ -1,10 +1,10 @@
 'use strict';
 
-class IntentResponder {
+class LexIntentParser {
 
 	constructor(log) {
 		this.log = log;
-		this.log.object = 'IntentResponder';
+		this.log.object = 'LexIntentParser';
 		this.intent = 'Unknown';
 	}
 
@@ -28,4 +28,4 @@ class IntentResponder {
 	}
 }
 
-module.exports = IntentResponder;
+module.exports = LexIntentParser;

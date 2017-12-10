@@ -39,7 +39,7 @@ describe('LexResponseHelper', function() {
 		});
 	});
 
-	describe('#fail', function() {
+	describe('#error', function() {
 		it('should send closure request with exception', function() {
 			sessionAttributes = "TestAttributes";
 			const message = 'blah';
@@ -60,11 +60,11 @@ describe('LexResponseHelper', function() {
 				}
 			};
 
-			subject.fail(message, exception);
+			subject.error(message, exception);
 			expect(subject.log).to.equal(log);
 			expect(subject.sessionAttributes).to.equal(sessionAttributes);
 			expect(log.warn).to.be.calledOnce;
-			expect(log.warn).to.be.calledWith('fail', {message: message, exception: exception});
+			expect(log.warn).to.be.calledWith('error', {message: message, exception: exception});
 			expect(log.trace).to.be.calledOnce;
 			expect(callback).to.be.calledOnce;
 			expect(callback).to.be.calledWith(exception, response);
@@ -88,20 +88,20 @@ describe('LexResponseHelper', function() {
 				}
 			};
 
-			subject.fail(message);
+			subject.error(message);
 			expect(subject.log).to.equal(log);
 			expect(subject.sessionAttributes).to.equal(sessionAttributes);
 			expect(log.warn).to.be.calledOnce;
 			expect(log.trace).to.be.calledOnce;
-			expect(log.warn).to.be.calledWith('fail', {message: message, exception: exception});
+			expect(log.warn).to.be.calledWith('error', {message: message, exception: exception});
 			expect(callback).to.be.calledOnce;
 			expect(callback).to.be.calledWith(null, response);
 		});
 
 	});
 
-	describe('#fulfill', function() {
-		it('should send closure request with fulfill status', function() {
+	describe('#say', function() {
+		it('should send closure request with say status', function() {
 			sessionAttributes = "TestAttributes";
 			const message = 'blah';
 
@@ -119,11 +119,11 @@ describe('LexResponseHelper', function() {
 				}
 			};
 
-			subject.fulfill(message);
+			subject.say(message);
 			expect(subject.log).to.equal(log);
 			expect(subject.sessionAttributes).to.equal(sessionAttributes);
 			expect(log.info).to.be.calledOnce;
-			expect(log.info).to.be.calledWith('fulfill', {message: message});
+			expect(log.info).to.be.calledWith('say', {message: message});
 			expect(log.trace).to.be.calledOnce;
 			expect(callback).to.be.calledOnce;
 			expect(callback).to.be.calledWith(null, response);

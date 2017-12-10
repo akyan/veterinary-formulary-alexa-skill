@@ -1,14 +1,16 @@
 'use strict';
-class LexResponseHelper {
+let ResponseHelper = require("../lib/ResponseHelper");
+
+class LexResponseHelper extends ResponseHelper {
 	constructor(log, sessionAttributes, callback) {
-		this.log = log;
+		super(log);
 		this.log.object = 'LexResponseHelper';
 		this.sessionAttributes = sessionAttributes;
 		this.callback = callback;
 	}
 
-	fail(message, exception) {
-		this.log.warn('fail', {message: message, exception: exception});
+	error(message, exception) {
+		super.error(message, exception);
 
 		let response = {
 			sessionAttributes: this.sessionAttributes,
@@ -22,18 +24,17 @@ class LexResponseHelper {
 			}
 		};
 
-		this.log.trace('fail', {response: response});
+		this.log.trace('error', {response: response});
 
-		if (typeof exception === 'undefined')
-		{
+		if (typeof exception === 'undefined') {
 			exception = null;
 		}
 
 		this.callback(exception, response);
 	}
 
-	fulfill(message) {
-		this.log.info('fulfill', {message: message});
+	say(message) {
+		super.say(message);
 
 		let response = {
 			sessionAttributes: this.sessionAttributes,
@@ -47,7 +48,7 @@ class LexResponseHelper {
 			}
 		};
 
-		this.log.trace('fulfill', {response: response});
+		this.log.trace('say', {response: response});
 
 		this.callback(null, response);
 	};
